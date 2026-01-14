@@ -57,7 +57,12 @@ document.addEventListener('DOMContentLoaded', fetchProducts);
 
 
 // CARTEL DE COMPROBACIÓN RÁPIDA PARA MÓVIL
-if (typeof supabase === 'undefined') {
+// CARTEL DE COMPROBACIÓN RÁPIDA PARA MÓVIL
+(async () => {
+    try {
+        const { data, error } = await supabase.from('productos').select('id').limit(1);
+        
+       if (typeof supabase === 'undefined') {
     alert("🚨 LA LIBRERÍA NO CARGÓ:\nRevisá que el <script> del CDN esté arriba de todo en tu HTML.");
 } else {
     // Si la librería existe, probamos la conexión
@@ -67,4 +72,7 @@ if (typeof supabase === 'undefined') {
     }).catch(err => {
         alert("🚨 ERROR DE RED:\n" + err.message);
     });
-    }
+}
+
+})();
+                  
