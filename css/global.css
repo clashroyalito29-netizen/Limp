@@ -1,1 +1,77 @@
+/* --- 1. VARIABLES GLOBALES (Personalidad de la marca) --- */
+:root {
+    /* Colores Principales (Fresh & Tech) */
+    --primary-blue: #00B4D8;       /* Azul agua */
+    --secondary-cyan: #90E0EF;     /* Cian suave */
+    --deep-navy: #03045E;          /* Azul profundo para textos */
+    --clean-white: #FFFFFF;        /* Limpieza pura */
+    --off-white: #F8F9FA;          /* Fondo suave para no cansar la vista */
+    
+    /* Colores de Acción */
+    --offer-green: #70E000;        /* Para botones de oferta */
+    --danger-red: #EF233C;         /* Para el carrito o alertas */
+    --gold-promo: #FFB703;         /* Para los flyers especiales */
+
+    /* Fuentes */
+    --font-main: 'Poppins', sans-serif;
+
+    /* Sombras y Efectos */
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    
+    /* Tiempos de Animación */
+    --transition-fast: 0.3s ease;
+    --transition-smooth: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- 2. RESET Y BASES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Fundamental para que los paddings no rompan el layout */
+    -webkit-tap-highlight-color: transparent; /* Quita el recuadro azul al tocar en celular */
+}
+
+html {
+    scroll-behavior: smooth; /* Para que al tocar un link la página "navegue" suavemente */
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--off-white);
+    color: var(--deep-navy);
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita que las animaciones generen scroll lateral */
+}
+
+/* --- 3. CLASES DE UTILIDAD (Reutilizables) --- */
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+ul { list-style: none; }
+a { text-decoration: none; color: inherit; }
+
+/* Scrollbar personalizada (Para que combine con la web) */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--off-white); }
+::-webkit-scrollbar-thumb {
+    background: var(--primary-blue);
+    border-radius: 10px;
+}
 
