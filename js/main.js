@@ -1,65 +1,56 @@
-// 1. Efecto de Scroll en el Nav
-window.addEventListener('scroll', () => {
-    const nav = document.getElementById('main-nav');
-    if (window.scrollY > 50) {
-        nav.classList.add('nav-scrolled');
-    } else {
-        nav.classList.remove('nav-scrolled');
+
+async function fetchProducts() {
+    const { data, error } = await supabase
+        .from('productos')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        console.error("Error cargando productos:", error);
+        return;
     }
-});
 
-// 2. Lógica del Buscador
-const searchInput = document.getElementById('main-search');
-const categoryFilter = document.getElementById('filter-category');
-
-searchInput.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase();
-    const category = categoryFilter.value;
-    
-    // Aquí es donde filtrarás los productos que vienen de Supabase
-    console.log(`Buscando: ${query} en categoría: ${category}`);
-    
-    // Podemos disparar una animación de "escaneando" en la grilla
-    filterProducts(query, category);
-});
-
-// Función ejemplo para filtrar (se completará con Supabase)
-function filterProducts(query, category) {
-    const cards = document.querySelectorAll('.product-card');
-    cards.forEach(card => {
-        const title = card.querySelector('h3').innerText.toLowerCase();
-        const cardCategory = card.dataset.category;
-        
-        const matchesQuery = title.includes(query);
-        const matchesCategory = category === 'all' || cardCategory === category;
-        
-        if (matchesQuery && matchesCategory) {
-            card.style.display = 'block';
-            card.classList.add('animate-in'); // Animación de re-entrada
-        } else {
-            card.style.display = 'none';
-        }
-    });
+    renderProducts(data);
 }
 
-const menuToggle = document.getElementById('mobile-menu');
-const navLinks = document.querySelector('.nav-links');
-const navItems = document.querySelectorAll('.nav-links a');
+function renderProducts(products) {
+    const grid = document.getElementById('product-grid');
+    const template = document.getElementById('card-template');
 
-// Abrir / Cerrar el menú al tocar la hamburguesa
-menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    
-    // Pequeña animación al icono
-    menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
-    menuToggle.style.transform = navLinks.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
-});
+    // Limpiamos los skeletons
+    grid.innerHTML = '';
 
-// Cerrar el menú automáticamente al tocar un link (para navegar en la misma página)
-navItems.forEach(item => {
-    item.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        menuToggle.textContent = '☰';
-        menuToggle.style.transform = 'rotate(0deg)';
+    products.forEach(product => {
+        const clone = template.content.cloneNode(true);
+        
+        // Llenamos la tarjeta con los datos de Supabase
+        clone.querySelector('.product-card').dataset.id = product.id;
+        clone.querySelector('.p-name').innerText = product.nombre;
+        clone.querySelector('.p-price').innerText = `$${product.precio}`;
+        clone.querySelector('img').src = product.imagen_url || 'default.jpg';
+        
+        // Agregamos la clase de animación de entrada
+        const card = clone.querySelector('.product-card');
+        card.classList.add('fade-up');
+
+        grid.appendChild(clone);
     });
-});
+
+    // Activamos las animaciones de entrada
+    setupScrollReveal();
+}
+
+// Función para que los productos aparezcan al hacer scroll
+function setupScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+}
+
+document.addEventListener('DOMContentLoaded', fetchProducts);
