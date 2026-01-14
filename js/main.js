@@ -56,23 +56,3 @@ function setupScrollReveal() {
 document.addEventListener('DOMContentLoaded', fetchProducts);
 
 
-// CARTEL DE COMPROBACIÓN RÁPIDA PARA MÓVIL
-// CARTEL DE COMPROBACIÓN RÁPIDA PARA MÓVIL
-(async () => {
-    try {
-        const { data, error } = await supabase.from('productos').select('id').limit(1);
-        
-       if (typeof supabase === 'undefined') {
-    alert("🚨 LA LIBRERÍA NO CARGÓ:\nRevisá que el <script> del CDN esté arriba de todo en tu HTML.");
-} else {
-    // Si la librería existe, probamos la conexión
-    supabase.from('productos').select('id').limit(1).then(({error}) => {
-        if (error) alert("❌ ERROR DE SUPABASE:\n" + error.message);
-        else alert("✅ TODO OK:\nLa librería y la conexión funcionan.");
-    }).catch(err => {
-        alert("🚨 ERROR DE RED:\n" + err.message);
-    });
-}
-    }
-})();
-                  
