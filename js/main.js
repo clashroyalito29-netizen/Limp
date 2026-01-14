@@ -55,14 +55,24 @@ function setupScrollReveal() {
 
 document.addEventListener('DOMContentLoaded', fetchProducts);
 
-const checkConnection = async () => {
+
+// CARTEL DE COMPROBACIÓN RÁPIDA PARA MÓVIL
+(async () => {
     try {
         const { data, error } = await supabase.from('productos').select('id').limit(1);
-        if (error) throw error;
-        console.log("🚀 Supabase está operando correctamente en eabpagvszxbxhzxiciyx");
+        
+        if (error) {
+            // Si hay un error de conexión o de API Key
+            alert("❌ ERROR DE CONEXIÓN:\n" + error.message);
+        } else {
+            // Si conecta pero no trae nada, puede ser RLS o tabla vacía
+            if (data.length === 0) {
+                alert("⚠️ CONECTADO, pero la tabla está vacía o tiene RLS activado.");
+            } else {
+                alert("✅ ¡ÉXITO! Supabase conectado y trayendo datos.");
+            }
+        }
     } catch (err) {
-        console.error("💀 Error crítico de Supabase:", err.message);
-        alert("Tía, hay un problema con la base de datos: " + err.message);
+        alert("🚨 ERROR CRÍTICO:\n" + err.message);
     }
-};
-
+})();
