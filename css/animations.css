@@ -1,1 +1,31 @@
 
+/* --- Animaciones de Enlaces --- */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #03045E;
+    font-weight: 500;
+    position: relative;
+    padding: 5px 0;
+}
+
+/* Subrayado animado */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #00B4D8;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
