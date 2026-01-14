@@ -73,3 +73,28 @@
     padding: 8px;
     outline: none;
 }
+/* --- Estilos para Celulares (Base) --- */
+.nav-container {
+    padding: 10px;
+    flex-direction: column; /* El logo arriba, buscador abajo */
+}
+
+.nav-links {
+    display: none; /* Escondemos el menú para usar el botón hamburguesa */
+}
+
+/* --- Estilos para Tablets y PC (Media Query) --- */
+@media (min-width: 768px) {
+    .nav-container {
+        flex-direction: row; /* Logo y buscador alineados */
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        display: flex; /* Mostramos el menú normal */
+    }
+
+    .menu-toggle {
+        display: none; /* Escondemos el botón hamburguesa */
+    }
+}
