@@ -14,7 +14,6 @@ if (typeof supabase === 'undefined') {
     supabaseClient.from('productos').select('id').limit(1)
         .then(({ data, error }) => {
             if (error) alert("❌ ERROR DE SUPABASE:\n" + error.message);
-            else alert("✅ ¡CONECTADO!\nYa podés borrar este cartel y seguir programando.");
         })
         .catch(err => alert("🚨 ERROR DE RED/SINTAXIS:\n" + err.message));
 }
