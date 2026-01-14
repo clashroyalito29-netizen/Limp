@@ -54,3 +54,15 @@ function setupScrollReveal() {
 }
 
 document.addEventListener('DOMContentLoaded', fetchProducts);
+
+const checkConnection = async () => {
+    try {
+        const { data, error } = await supabase.from('productos').select('id').limit(1);
+        if (error) throw error;
+        console.log("🚀 Supabase está operando correctamente en eabpagvszxbxhzxiciyx");
+    } catch (err) {
+        console.error("💀 Error crítico de Supabase:", err.message);
+        alert("Tía, hay un problema con la base de datos: " + err.message);
+    }
+};
+
