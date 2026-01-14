@@ -42,3 +42,24 @@ function filterProducts(query, category) {
     });
 }
 
+const menuToggle = document.getElementById('mobile-menu');
+const navLinks = document.querySelector('.nav-links');
+const navItems = document.querySelectorAll('.nav-links a');
+
+// Abrir / Cerrar el menú al tocar la hamburguesa
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    
+    // Pequeña animación al icono
+    menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+    menuToggle.style.transform = navLinks.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+});
+
+// Cerrar el menú automáticamente al tocar un link (para navegar en la misma página)
+navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuToggle.textContent = '☰';
+        menuToggle.style.transform = 'rotate(0deg)';
+    });
+});
