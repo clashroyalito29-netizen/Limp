@@ -29,3 +29,25 @@
 .nav-links a:hover::after {
     width: 100%;
 }
+/* Animación para que los links entren con estilo */
+.nav-links.active li {
+    animation: linkFadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+/* Retraso por cada link (1ro, 2do, 3ro...) */
+.nav-links.active li:nth-child(1) { animation-delay: 0.1s; }
+.nav-links.active li:nth-child(2) { animation-delay: 0.2s; }
+.nav-links.active li:nth-child(3) { animation-delay: 0.3s; }
+.nav-links.active li:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes linkFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
