@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título de la Página</title>
+</head>
+<body>
+
+<header id="main-nav" class="nav-initial">
+    <nav class="nav-container">
+        <div class="logo">
+            <span class="logo-icon">🧼</span>
+            <div class="logo-text">Limpieza<span>Ya</span></div>
+        </div>
+
+        <div class="search-wrapper">
+            <div class="search-bar">
+                <select id="filter-category" class="search-filter">
+                    <option value="all">Todo</option>
+                    <option value="jabones">Jabones</option>
+                    <option value="plasticos">Plásticos</option>
+                    <option value="ofertas">Ofertas</option>
+                </select>
+                <div class="divider"></div>
+                <input type="text" id="main-search" placeholder="¿Qué buscas hoy, tía?" autocomplete="off">
+                <button id="search-btn">🔍</button>
+            </div>
+            <div id="search-suggestions" class="suggestions-hidden"></div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#hero" class="active">Inicio</a></li>
+            <li><a href="#products">Productos</a></li>
+            <li><a href="#soap-experience">Tu Jabón</a></li>
+            <li><a href="admin.html" class="admin-access">Panel</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <div id="cart-btn" class="cart-container">
+                <span id="cart-count">0</span>
+                <span class="cart-icon">🛒</span>
+            </div>
+            <button class="menu-toggle" id="mobile-menu">☰</button>
+        </div>
+    </nav>
+</header>
+
+
+</body>
+</html>
+
