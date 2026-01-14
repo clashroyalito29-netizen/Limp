@@ -1,1 +1,75 @@
+/* --- Estilos del Nav --- */
+#main-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 15px 0;
+}
 
+/* Efecto Glassmorphism al hacer scroll */
+.nav-scrolled {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    padding: 8px 0 !important;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+/* --- Buscador Pro --- */
+.search-wrapper {
+    position: relative;
+    flex: 1;
+    max-width: 500px;
+    margin: 0 30px;
+}
+
+.search-bar {
+    display: flex;
+    background: #f1f3f5;
+    border-radius: 50px;
+    padding: 5px 15px;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar:focus-within {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(0, 180, 216, 0.3);
+    background: white;
+}
+
+.search-filter {
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    color: #03045E;
+    cursor: pointer;
+    padding: 5px;
+    outline: none;
+}
+
+.divider {
+    width: 1px;
+    height: 20px;
+    background: #ccc;
+    margin: 0 10px;
+}
+
+#main-search {
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 8px;
+    outline: none;
+}
