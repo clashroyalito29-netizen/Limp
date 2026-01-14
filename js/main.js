@@ -73,6 +73,6 @@ document.addEventListener('DOMContentLoaded', fetchProducts);
         alert("🚨 ERROR DE RED:\n" + err.message);
     });
 }
-
+    }
 })();
                   
