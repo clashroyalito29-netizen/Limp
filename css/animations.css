@@ -1,53 +1,96 @@
-
-/* --- Animaciones de Enlaces --- */
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 25px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #03045E;
-    font-weight: 500;
-    position: relative;
-    padding: 5px 0;
-}
-
-/* Subrayado animado */
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #00B4D8;
-    transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-/* Animación para que los links entren con estilo */
-.nav-links.active li {
-    animation: linkFadeIn 0.5s ease forwards;
-    opacity: 0;
-}
-
-/* Retraso por cada link (1ro, 2do, 3ro...) */
-.nav-links.active li:nth-child(1) { animation-delay: 0.1s; }
-.nav-links.active li:nth-child(2) { animation-delay: 0.2s; }
-.nav-links.active li:nth-child(3) { animation-delay: 0.3s; }
-.nav-links.active li:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes linkFadeIn {
-    from {
+/* --- 1. BURBUJAS DE FONDO (Efecto Agua) --- */
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0);
         opacity: 0;
-        transform: translateY(20px);
+    }
+    20% { opacity: 0.5; }
+    80% { opacity: 0.5; }
+    100% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 0;
+    }
+}
+
+.bubble {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    bottom: -100px;
+    animation: floatUp 8s infinite linear;
+}
+
+/* --- 2. REVELADO DE TEXTO (Efecto Limpieza) --- */
+@keyframes revealText {
+    from {
+        clip-path: inset(0 100% 0 0);
+        filter: blur(10px);
     }
     to {
-        opacity: 1;
-        transform: translateY(0);
+        clip-path: inset(0 0 0 0);
+        filter: blur(0);
     }
+}
+
+.text-reveal {
+    animation: revealText 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* --- 3. DESTELLO DE LIMPIEZA (Glass Shine) --- */
+@keyframes shine {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+}
+
+.glass-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-shine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.6),
+        transparent
+    );
+    transform: skewX(-25deg);
+    animation: shine 4s infinite;
+}
+
+/* --- 4. LLENADO DE LÍQUIDO (Soap Experience) --- */
+.liquid-fill-anim {
+    transition: height 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* --- 5. LATIDO DE ATENCIÓN (WhatsApp y Ofertas) --- */
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(112, 224, 0, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(112, 224, 0, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(112, 224, 0, 0); }
+}
+
+.pulse-anim {
+    animation: pulse 2s infinite;
+}
+
+/* --- 6. ENTRADA DE PRODUCTOS (Scroll Reveal) --- */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
