@@ -12,44 +12,36 @@
 </head>
 <body>
 
-<header id="main-nav" class="nav-initial">
-    <nav class="nav-container">
-        <div class="logo">
-            <span class="logo-icon">🧼</span>
-            <div class="logo-text">Limpieza<span>Ya</span></div>
-        </div>
-
-        <div class="search-wrapper">
-            <div class="search-bar">
-                <select id="filter-category" class="search-filter">
-                    <option value="all">Todo</option>
-                    <option value="jabones">Jabones</option>
-                    <option value="plasticos">Plásticos</option>
-                    <option value="ofertas">Ofertas</option>
-                </select>
-                <div class="divider"></div>
-                <input type="text" id="main-search" placeholder="¿Qué buscas hoy, tía?" autocomplete="off">
-                <button id="search-btn">🔍</button>
-            </div>
-            <div id="search-suggestions" class="suggestions-hidden"></div>
-        </div>
-
-        <ul class="nav-links">
-            <li><a href="#hero" class="active">Inicio</a></li>
-            <li><a href="#products">Productos</a></li>
-            <li><a href="#soap-experience">Tu Jabón</a></li>
-            <li><a href="admin.html" class="admin-access">Panel</a></li>
-        </ul>
-
-        <div class="nav-actions">
-            <div id="cart-btn" class="cart-container">
-                <span id="cart-count">0</span>
-                <span class="cart-icon">🛒</span>
-            </div>
+<header id="main-nav">
+    <div class="nav-top">
+        <div class="nav-side">
             <button class="menu-toggle" id="mobile-menu">☰</button>
         </div>
-    </nav>
+
+        <div class="logo">
+            <span class="emoji">🧼</span>
+            <h1>Limpieza<span>Ya</span></h1>
+        </div>
+
+        <div class="nav-side side-right">
+            <div id="cart-btn" class="cart-wrapper">
+                <span id="cart-count">0</span>
+                <span class="icon">🛒</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-section">
+        <div class="search-pill">
+            <select id="filter-category">
+                <option value="all">Ofertas</option>
+            </select>
+            <input type="text" placeholder="¿Qué buscas hoy?">
+            <button class="search-icon">🔍</button>
+        </div>
+    </div>
 </header>
+    
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-config.js"></script>
