@@ -1,3 +1,7 @@
+/* ================================================================
+   MOTORES DE ANIMACIÓN - LIMPIEZAYA
+================================================================ */
+
 /* --- 1. BURBUJAS DE FONDO (Efecto Agua) --- */
 @keyframes floatUp {
     0% {
@@ -22,36 +26,20 @@
     animation: floatUp 8s infinite linear;
 }
 
-/* --- 2. REVELADO DE TEXTO (Efecto Limpieza) --- */
-@keyframes revealText {
-    from {
-        clip-path: inset(0 100% 0 0);
-        filter: blur(10px);
-    }
-    to {
-        clip-path: inset(0 0 0 0);
-        filter: blur(0);
-    }
+/* --- 2. CINTA DE OFERTAS (Marquee) --- */
+@keyframes scroll-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
-.text-reveal {
-    animation: revealText 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-}
-
-/* --- 3. DESTELLO DE LIMPIEZA (Glass Shine) --- */
+/* --- 3. EFECTO BRILLO (Glass Shine para Cards) --- */
 @keyframes shine {
     0% { left: -100%; }
     20% { left: 100%; }
     100% { left: 100%; }
 }
 
-.glass-shine {
-    position: relative;
-    overflow: hidden;
-}
-
-.glass-shine::after {
-    content: '';
+.card-shine {
     position: absolute;
     top: 0;
     left: -100%;
@@ -60,19 +48,14 @@
     background: linear-gradient(
         to right,
         transparent,
-        rgba(255, 255, 255, 0.6),
+        rgba(255, 255, 255, 0.4),
         transparent
     );
     transform: skewX(-25deg);
-    animation: shine 4s infinite;
+    animation: shine 6s infinite;
 }
 
-/* --- 4. LLENADO DE LÍQUIDO (Soap Experience) --- */
-.liquid-fill-anim {
-    transition: height 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-/* --- 5. LATIDO DE ATENCIÓN (WhatsApp y Ofertas) --- */
+/* --- 4. LATIDO (WhatsApp y Carrito) --- */
 @keyframes pulse {
     0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(112, 224, 0, 0.7); }
     70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(112, 224, 0, 0); }
@@ -83,14 +66,40 @@
     animation: pulse 2s infinite;
 }
 
-/* --- 6. ENTRADA DE PRODUCTOS (Scroll Reveal) --- */
+/* --- 5. CARGA PROGRESIVA (Skeleton) --- */
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* --- 6. REVELADO AL HACER SCROLL --- */
 .fade-up {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .fade-up.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* --- 7. LLENADO DE LÍQUIDO (Sección Botella) --- */
+@keyframes wave {
+    0% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(-25%) translateY(2px); }
+    100% { transform: translateX(0) translateY(0); }
+}
+
+.liquid-bg::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 200%;
+    height: 20px;
+    background: inherit;
+    border-radius: 40%;
+    animation: wave 3s infinite linear;
+    opacity: 0.6;
 }
