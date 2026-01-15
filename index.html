@@ -5,83 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     
     <title>LimpiezaYa | Artículos de Limpieza en Pico Truncado</title>
-    <meta name="description" content="Venta de jabón suelto y artículos de limpieza premium en Pico Truncado. ¡Ahorrá comprando a granel!">
-    <meta name="keywords" content="limpieza pico truncado, jabon suelto, detergente, manuel cardenas">
-    <link rel="canonical" href="https://limpiezaya-alpha.vercel.app/">
-
-    <meta property="og:title" content="LimpiezaYa | Tu hogar impecable">
-    <meta property="og:description" content="Hacé tu pedido de limpieza suelta y te lo llevamos a domicilio en Truncado.">
+    <meta name="description" content="Venta de jabón suelto, artículos de limpieza y plásticos premium en Pico Truncado. ¡Ahorrá comprando a granel con LimpiezaYa!">
+    <meta property="og:title" content="LimpiezaYa - Pico Truncado">
     <meta property="og:image" content="https://eabpagvszxbxhzxiciyx.supabase.co/storage/v1/object/public/productos/banner-seo.jpg">
-    <meta name="theme-color" content="#4A90E2">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/animations.css">
 </head>
-    
 <body>
     <div id="bubble-canvas-container"></div>
 
     <header id="main-nav" class="glass-effect">
         <div class="nav-top">
             <div class="nav-left">
-                <button id="menu-toggle" class="btn-icon" aria-label="Abrir menú">☰</button>
+                <button id="menu-toggle" class="btn-nav-round">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
             <a href="index.html" class="logo-brand">
                 <h1>Limpieza<span>Ya</span></h1>
             </a>
             <div class="nav-right">
-                <button id="cart-toggle" class="btn-icon">
+                <button id="cart-toggle" class="btn-nav-round cart-btn">
                     🛒 <span id="cart-count">0</span>
                 </button>
             </div>
         </div>
-        
         <div class="nav-search-bar">
             <div class="search-box">
                 <input type="text" id="main-search" placeholder="¿Qué buscás hoy?">
-                <button class="btn-search">🔍</button>
             </div>
         </div>
     </header>
 
-    <main>
+    <aside id="side-menu" class="panel-overlay left">
+        <div class="panel-content stitch-gradient">
+            <button class="close-panel" id="close-menu">✕</button>
+            <nav class="side-nav">
+                <h3>Menú Ohana</h3>
+                <a href="#hero">🏠 Inicio</a>
+                <a href="#products">🧼 Catálogo</a>
+                <a href="#soap-experience">🧪 Llenar Botella</a>
+                <a href="admin.html">🔑 Panel Dueña</a>
+            </nav>
+        </div>
+    </aside>
+
+    <aside id="cart-drawer" class="panel-overlay right">
+        <div class="panel-content">
+            <button class="close-panel" id="close-cart">✕</button>
+            <div class="cart-header">
+                <h3>Tu Carrito</h3>
+            </div>
+            <div id="cart-items" class="cart-scroll">
+                </div>
+            <div class="cart-footer">
+                <div class="total-row">
+                    <span>Total estimado:</span>
+                    <span id="cart-total">$0</span>
+                </div>
+                <button class="btn-mercadopago">
+                    💳 Pagar con Mercado Pago
+                </button>
+                <button class="btn-checkout">
+                    📲 Pedir por WhatsApp
+                </button>
+            </div>
+        </div>
+    </aside>
+        <main>
         <section class="hero-section" id="hero">
             <div class="hero-container">
-                <h2 class="text-reveal">Tu hogar <span>impecable</span> en Pico Truncado.</h2>
-                <p>Artículos de limpieza de calidad premium y plásticos. ¡Envíos a domicilio!</p>
+                <h2 class="text-reveal">Tu hogar <span>impecable</span>.</h2>
+                <p>Calidad premium en Pico Truncado. ¡Envíos gratis en el día!</p>
                 <div class="hero-btns">
-                    <a href="#products" class="btn-primary">Ver Catálogo</a>
-                    <a href="#soap-experience" class="btn-outline">Comprar Suelto</a>
+                    <a href="#products" class="btn-primary">Ver Productos</a>
+                    <a href="#soap-experience" class="btn-outline">Jabón Suelto</a>
                 </div>
             </div>
         </section>
 
-        <div class="marquee-section">
-            <div class="marquee-wrapper">
-                <div class="marquee-content">
-                    <span class="flyer-item">✨ Jabón Tipo Ariel $1500 xL</span>
-                    <span class="flyer-item">🧼 Suavizante Lavanda en Stock</span>
-                    <span class="flyer-item">🚚 Envíos Gratis en Truncado</span>
-                    <span class="flyer-item">💎 Calidad Garantizada</span>
-                    <span class="flyer-item">✨ Jabón Tipo Ariel $1500 xL</span>
-                    <span class="flyer-item">🧼 Suavizante Lavanda en Stock</span>
-                    <span class="flyer-item">🚚 Envíos Gratis en Truncado</span>
-                    <span class="flyer-item">💎 Calidad Garantizada</span>
-                </div>
-            </div>
-        </div>
         <section class="section-container" id="products">
-            <div class="filter-pills">
-                <button class="filter-pill active" data-category="todos">Todos</button>
-                <button class="filter-pill" data-category="suelto">Jabón Suelto</button>
-                <button class="filter-pill" data-category="limpieza">Limpieza</button>
-                <button class="filter-pill" data-category="plasticos">Plásticos</button>
+            <div class="section-header">
+                <h3>Nuestros Productos</h3>
+                <div class="filter-pills">
+                    <button class="filter-pill active" data-category="todos">Todos</button>
+                    <button class="filter-pill" data-category="suelto">Suelto</button>
+                    <button class="filter-pill" data-category="limpieza">Limpieza</button>
+                    <button class="filter-pill" data-category="plasticos">Plásticos</button>
+                </div>
             </div>
             
             <div id="product-grid" class="product-grid"></div>
@@ -96,25 +113,29 @@
                     </div>
                 </div>
                 <div class="soap-info">
-                    <h3>Tu jabón, a tu medida</h3>
-                    <p>Seleccioná la cantidad exacta. ¡Más comprás, menos pagás!</p>
+                    <h3>Jabón a tu medida</h3>
+                    <p>Seleccioná la cantidad y el líquido subirá automáticamente.</p>
                     
-                    <div class="liter-chips">
-                        <button class="btn-chip" data-liters="1">1L</button>
-                        <button class="btn-chip" data-liters="2">2L</button>
-                        <button class="btn-chip" data-liters="5">5L</button>
+                    <div class="liter-selector">
+                        <span>Elegí los litros:</span>
+                        <div class="liter-chips">
+                            <button class="btn-chip" data-liters="1">1L</button>
+                            <button class="btn-chip" data-liters="2">2L</button>
+                            <button class="btn-chip" data-liters="5">5L</button>
+                        </div>
                     </div>
 
-                    <div class="price-display">
-                        <span id="display-liters">1L</span> 
-                        <span class="price-divider">|</span> 
-                        <span id="display-price">$0.00</span>
+                    <div class="price-box">
+                        <div class="price-row">
+                            <span id="display-liters">1L</span>
+                            <span class="divider">|</span>
+                            <span id="display-price">$1.500</span>
+                        </div>
+                        <input type="range" id="liters-range" min="1" max="10" value="1" step="1">
                     </div>
-
-                    <input type="range" id="liters-range" min="1" max="10" value="1" step="1">
                     
                     <button class="btn-add-bulk pulse-anim">
-                        🛒 Agregar litros al carrito
+                        🛒 Sumar litros al carrito
                     </button>
                 </div>
             </div>
@@ -122,39 +143,12 @@
     </main>
 
     <footer id="main-footer">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <div class="logo-footer">Limpieza<span>Ya</span></div>
-                <p>Calidad premium en Pico Truncado.</p>
-            </div>
-            <div class="footer-contact">
-                <p>📍 Santa Cruz, Pico Truncado</p>
-                <p>📞 2975373508</p> </div>
+        <div class="footer-content">
+            <div class="logo-footer">Limpieza<span>Ya</span></div>
+            <p>📍 Pico Truncado, Santa Cruz</p>
+            <p>Desarrollado por <strong>Manuel Cardenas</strong></p>
         </div>
-        <div class="footer-copy">
-            <p>&copy; 2026 Desarrollado por <strong>Manuel Cardenas</strong>.</p> </div>
     </footer>
-
-    <aside id="side-menu" class="panel-overlay left">
-        <div class="panel-content">
-            <nav class="side-nav">
-                <a href="#hero">Inicio</a>
-                <a href="#products">Ver Catálogo</a>
-                <a href="admin.html">Panel Dueña 🔑</a>
-            </nav>
-        </div>
-    </aside>
-
-    <aside id="cart-drawer" class="panel-overlay right">
-        <div class="panel-content">
-            <h3>Tu Pedido</h3>
-            <div id="cart-items"></div>
-            <div class="cart-total-box">
-                <p>Total estimado: <span id="cart-total">$0.00</span></p>
-                <button class="btn-checkout">Finalizar por WhatsApp</button>
-            </div>
-        </div>
-    </aside>
 
     <a href="https://wa.me/2975373508" class="wa-float pulse-anim" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
@@ -168,12 +162,12 @@
             <div class="card-body">
                 <h4 class="p-name"></h4>
                 <p class="p-price"></p>
-                <button class="btn-add-item">Sumar 🛒</button>
+                <button class="btn-add-to-cart">Agregar 🛒</button>
             </div>
         </div>
     </template>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-config.js"></script> <script src="js/animations.js"></script>
     <script src="js/shop.js"></script> <script src="js/main.js"></script> </body>
 </html>
