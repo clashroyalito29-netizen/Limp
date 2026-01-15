@@ -1,103 +1,86 @@
 /**
- * Lógica de Carrito y Ventas - LimpiezaYa
+ * Lógica de Carrito y Botella Interactiva
+ * Manuel Cardenas - Pico Truncado
  */
 
-// 1. Estado Global del Carrito
-let cart = JSON.parse(localStorage.getItem('cart_limpieza')) || [];
+let cart = JSON.parse(localStorage.getItem('limpieza_cart')) || [];
 
-// 2. Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     updateCartUI();
-    setupCartListeners();
+    setupBottleLogic();
 });
 
-// 3. Configurar Eventos
-function setupCartListeners() {
-    // Abrir/Cerrar Carrito
-    const cartBtn = document.getElementById('cart-toggle');
-    const closeCart = document.querySelector('#cart-drawer .btn-close');
-    const cartDrawer = document.getElementById('cart-drawer');
+// --- SECCIÓN BOTELLA INTERACTIVA ---
+function setupBottleLogic() {
+    const range = document.getElementById('liters-range');
+    const liquid = document.querySelector('.liquid-bg');
+    const displayLiters = document.getElementById('display-liters');
+    const displayPrice = document.getElementById('display-price');
+    const btnAddBulk = document.querySelector('.btn-add-bulk');
 
-    if (cartBtn) {
-        cartBtn.addEventListener('click', () => cartDrawer.classList.add('active'));
-    }
-    if (closeCart) {
-        closeCart.addEventListener('click', () => cartDrawer.classList.remove('active'));
-    }
+    const PRICE_PER_LITER = 1500; // Podés traerlo de Supabase luego
 
-    // Escuchar clicks en botones de "Agregar" (Delegación de eventos para productos dinámicos)
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-add-item')) {
-            const card = e.target.closest('.product-card');
-            const product = {
-                id: card.dataset.id,
-                name: card.querySelector('.p-name').innerText,
-                price: parseFloat(card.querySelector('.p-price').innerText.replace('$', '')),
-                img: card.querySelector('img').src,
-                qty: 1
-            };
-            addToCart(product);
-        }
+    if(!range) return;
+
+    range.addEventListener('input', (e) => {
+        const liters = e.target.value;
+        const total = liters * PRICE_PER_LITER;
+        
+        // Animamos la botella
+        liquid.style.height = (liters * 20) + "%"; // 5L = 100%
+        displayLiters.innerText = liters + "L";
+        displayPrice.innerText = "$" + total;
+    });
+
+    btnAddBulk.addEventListener('click', () => {
+        const liters = range.value;
+        const item = {
+            id: 'bulk-' + Date.now(),
+            name: `Jabón Suelto (${liters}L)`,
+            price: liters * PRICE_PER_LITER,
+            img: 'img/bottle-icon.png',
+            qty: 1
+        };
+        addToCart(item);
+        alert(`¡Se agregaron ${liters}L al carrito!`);
     });
 }
 
-// 4. Agregar al Carrito
+// --- LÓGICA DEL CARRITO ---
 function addToCart(product) {
-    const existing = cart.find(item => item.id === product.id);
-    
+    const existing = cart.find(i => i.id === product.id);
     if (existing) {
         existing.qty++;
     } else {
         cart.push(product);
     }
-
-    saveAndRefresh();
-    
-    // Pequeña animación visual al icono del carrito
-    const cartIcon = document.querySelector('.cart-icon');
-    cartIcon.classList.add('pulse-anim');
-    setTimeout(() => cartIcon.classList.remove('pulse-anim'), 500);
+    saveCart();
 }
 
-// 5. Guardar y Refrescar
-function saveAndRefresh() {
-    localStorage.setItem('cart_limpieza', JSON.stringify(cart));
+function saveCart() {
+    localStorage.setItem('limpieza_cart', JSON.stringify(cart));
     updateCartUI();
 }
 
-// 6. Actualizar Interfaz del Carrito
 function updateCartUI() {
-    const cartCount = document.getElementById('cart-count');
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-
-    // Actualizar contador del Nav
+    const count = document.getElementById('cart-count');
+    const totalElement = document.getElementById('cart-total');
+    
     const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
-    cartCount.innerText = totalItems;
-
-    // Limpiar y Dibujar items
-    cartItemsContainer.innerHTML = '';
-    let totalMoney = 0;
-
-    cart.forEach((item, index) => {
-        totalMoney += item.price * item.qty;
-        cartItemsContainer.innerHTML += `
-            <div class="cart-item">
-                <img src="${item.img}" width="50">
-                <div class="item-info">
-                    <p>${item.name}</p>
-                    <span>${item.qty}x $${item.price}</span>
-                </div>
-                <button onclick="removeFromCart(${index})" class="btn-remove">🗑️</button>
-            </div>
-        `;
-    });
-
-    cartTotal.innerText = `$${totalMoney.toFixed(2)}`;
+    const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+    
+    if(count) count.innerText = totalItems;
+    if(totalElement) totalElement.innerText = "$" + totalPrice;
 }
 
-// 7. Eliminar item
-window.removeFromCart = (index) => {
-    cart.splice(index, 1);
-    saveAndRefresh();
-};
+// Botón de WhatsApp - Finalizar Compra
+document.querySelector('.btn-checkout')?.addEventListener('click', () => {
+    let message = "Hola LimpiezaYa! Quiero pedir:\n";
+    cart.forEach(i => {
+        message += `- ${i.name} x${i.qty} ($${i.price * i.qty})\n`;
+    });
+    const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+    message += `*Total: $${total}*`;
+    
+    window.open(`https://wa.me/2975373508?text=${encodeURIComponent(message)}`);
+});
