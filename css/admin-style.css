@@ -1,1 +1,246 @@
+/* ================================================================
+   ADMIN PANEL THEME: "OHANA ELEGANCE" (Stitch Inspired)
+   Autor: Manuel Cardenas
+================================================================ */
+
+:root {
+    /* Paleta de Colores Stitch */
+    --stitch-blue: #4A90E2;       /* El azul vibrante de su pelaje */
+    --stitch-sky: #D0E8FF;        /* Azul cielo suave para fondos */
+    --stitch-pink: #F5A3C7;       /* El rosa de sus orejas (para acentos) */
+    --stitch-deep: #2C3E50;       /* Azul oscuro para textos legibles */
+    --stitch-sand: #FFF8E1;       /* Un tono arena muy suave */
+}
+
+/* --- 1. FONDO GENERAL Y LOGIN --- */
+body {
+    /* Un degradado suave que simula un cielo tropical */
+    background: linear-gradient(135deg, var(--stitch-sky) 0%, #ffffff 100%);
+    min-height: 100vh;
+}
+
+/* Contenedor del Login centrado */
+.admin-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* Fondo con un toque más "Stitch" para el login */
+    background: radial-gradient(circle at top right, var(--stitch-pink), transparent 40%),
+                linear-gradient(to bottom, var(--stitch-blue), var(--stitch-sky));
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.9); /* Efecto vidrio esmerilado */
+    padding: 40px 30px;
+    border-radius: 30px; /* Bordes muy redondeados, amigables */
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    border: 3px solid var(--stitch-sky);
+    box-shadow: 0 15px 35px rgba(74, 144, 226, 0.3); /* Sombra azulada */
+}
+
+.login-box h2 {
+    color: var(--stitch-blue);
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+/* Inputs del login más "gorditos" y suaves */
+.login-box input {
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 50px;
+    border: 2px solid var(--stitch-sky);
+    background: #fcfcfc;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.login-box input:focus {
+    border-color: var(--stitch-pink); /* Acento rosa al escribir */
+    outline: none;
+    background: white;
+}
+
+/* --- 2. HEADER DEL PANEL --- */
+.admin-header {
+    padding: 15px 20px;
+    background: white;
+    border-bottom: 4px solid var(--stitch-blue); /* Borde inferior azul fuerte */
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-brand h1 { color: var(--stitch-deep); }
+.logo-brand span { color: var(--stitch-pink); /* El "Ya" en rosa Stitch */ }
+
+/* --- 3. TARJETAS DEL PANEL (Formulario y Lista) --- */
+.admin-card {
+    background: white;
+    border-radius: 25px; /* Muy redondeado */
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.1);
+    border-top: 6px solid var(--stitch-pink); /* Un toque rosa en el techo de la tarjeta */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Un pequeño detalle decorativo sutil en la esquina (opcional) */
+.admin-card::after {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 60px; height: 60px;
+    background: var(--stitch-sky);
+    border-radius: 50%;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.admin-card h3 {
+    color: var(--stitch-deep);
+    margin-bottom: 25px;
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- 4. FORMULARIO DE CARGA --- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--stitch-deep);
+    margin-bottom: 10px;
+}
+
+/* Input de archivo personalizado */
+.form-group input[type="file"] {
+    padding: 12px;
+    background: var(--stitch-sky);
+    border-radius: 15px;
+    width: 100%;
+    color: var(--stitch-deep);
+    cursor: pointer;
+}
+
+/* Inputs de texto y selects */
+#product-form input:not([type=file]),
+#product-form select {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 20px;
+    border: 2px solid var(--stitch-sky);
+    margin-bottom: 15px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: #fcfcfc;
+    transition: 0.3s;
+}
+
+#product-form input:focus,
+#product-form select:focus {
+    border-color: var(--stitch-blue);
+    background: white;
+    outline: none;
+}
+
+/* Botón de carga principal */
+#product-form .btn-primary {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    background: var(--stitch-blue);
+    /* Un degradado sutil en el botón */
+    background: linear-gradient(to right, var(--stitch-blue), #64a6f5);
+}
+#product-form .btn-primary:hover {
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+}
+
+/* --- 5. LISTA DE GESTIÓN DE PRODUCTOS --- */
+.admin-list {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.admin-item-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    border: 2px solid #f0f0f0;
+    transition: 0.3s ease;
+}
+
+.admin-item-card:hover {
+    border-color: var(--stitch-sky);
+    transform: translateX(5px); /* Un pequeño saltito juguetón al pasar el mouse */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.admin-item-card img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid var(--stitch-sky);
+    margin-right: 15px;
+}
+
+.admin-item-card .info {
+    flex: 1;
+}
+
+.admin-item-card .info strong {
+    display: block;
+    color: var(--stitch-deep);
+    font-size: 1rem;
+}
+
+.admin-item-card .info span {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* Botón de eliminar (Rosa Stitch en vez de rojo agresivo) */
+.btn-del {
+    background: var(--stitch-pink);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-del:hover {
+    background: #e08eb0;
+    transform: scale(1.1);
+  }
 
