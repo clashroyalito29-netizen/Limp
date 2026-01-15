@@ -103,3 +103,61 @@
     animation: wave 3s infinite linear;
     opacity: 0.6;
 }
+/* --- ESTILOS DEL SPLASH SCREEN --- */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--primary-blue); /* El azul de Stitch */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Por encima de absolutamente todo */
+    transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1), 
+                visibility 0.8s;
+}
+
+/* El logo en el splash */
+.logo-splash {
+    font-size: 3rem;
+    color: white;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-splash span {
+    color: var(--primary-pink);
+}
+
+/* Efecto de burbujas de carga debajo del logo */
+.splash-loader-bubbles {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.splash-loader-bubbles span {
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    animation: splash-dots 0.6s infinite alternate;
+}
+
+.splash-loader-bubbles span:nth-child(2) { animation-delay: 0.2s; }
+.splash-loader-bubbles span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes splash-dots {
+    from { transform: translateY(0); opacity: 0.5; }
+    to { transform: translateY(-10px); opacity: 1; }
+}
+
+/* CLASE PARA DESAPARECER (Triggered by JS) */
+#splash-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1); /* Efecto de que la web "emerge" hacia adelante */
+}
