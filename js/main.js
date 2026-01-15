@@ -109,3 +109,39 @@ function applyScrollReveal() {
 }
 
 document.addEventListener('DOMContentLoaded', initApp);
+/**
+ * main.js - Parte Final
+ */
+
+function setupInteractions() {
+    // 1. Lógica de Menú Hamburguesa
+    const menuBtn = document.getElementById('menu-toggle');
+    const closeMenu = document.getElementById('close-menu');
+    const sideMenu = document.getElementById('side-menu');
+
+    menuBtn?.addEventListener('click', () => sideMenu.classList.add('active'));
+    closeMenu?.addEventListener('click', () => sideMenu.classList.remove('active'));
+
+    // 2. Lógica de Cierre de Carrito
+    const closeCart = document.getElementById('close-cart');
+    const cartDrawer = document.getElementById('cart-drawer');
+
+    closeCart?.addEventListener('click', () => cartDrawer.classList.remove('active'));
+
+    // 3. Conectar Catálogo con Carrito
+    document.getElementById('product-grid').addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-add-to-cart')) {
+            const card = e.target.closest('.product-card');
+            const product = {
+                id: card.dataset.id,
+                nombre: card.querySelector('.p-name').innerText,
+                precio: parseFloat(card.querySelector('.p-price').innerText.replace('$', '')),
+                cantidad: 1
+            };
+            addToCart(product); // Llama a la función de shop.js
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', setupInteractions);
+
