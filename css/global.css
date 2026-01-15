@@ -1,62 +1,63 @@
-/* --- 1. VARIABLES GLOBALES (Personalidad de la marca) --- */
+/* ================================================================
+   GLOBAL STYLES - LIMPIEZAYA 
+   Tema: Ohana Elegance (Stitch Inspired)
+   Desarrollador: Manuel Cardenas | Full Stack Dev
+   Ubicación: Pico Truncado, Santa Cruz
+================================================================ */
+
 :root {
-    /* Colores Principales (Fresh & Tech) */
-    --primary-blue: #00B4D8;       /* Azul agua */
-    --secondary-cyan: #90E0EF;     /* Cian suave */
-    --deep-navy: #03045E;          /* Azul profundo para textos */
-    --clean-white: #FFFFFF;        /* Limpieza pura */
-    --off-white: #F8F9FA;          /* Fondo suave para no cansar la vista */
+    /* Paleta de Colores Stitch */
+    --primary-blue: #4A90E2;    /* Azul Stitch vibrante */
+    --primary-pink: #F5A3C7;    /* Rosa orejas de Stitch */
+    --deep-navy: #03045E;       /* Azul profundo para textos y nav */
+    --sky-light: #CAF0F8;       /* Celeste agua para fondos suaves */
+    --clean-white: #FFFFFF;     /* Blanco puro */
+    --off-white: #F8F9FA;       /* Gris muy claro para secciones */
+    --gold-promo: #FFD700;      /* Dorado para ofertas y estrellas */
     
-    /* Colores de Acción */
-    --offer-green: #70E000;        /* Para botones de oferta */
-    --danger-red: #EF233C;         /* Para el carrito o alertas */
-    --gold-promo: #FFB703;         /* Para los flyers especiales */
-
-    /* Fuentes */
-    --font-main: 'Poppins', sans-serif;
-
-    /* Sombras y Efectos */
-    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+    /* Efectos y Transiciones */
     --glass-bg: rgba(255, 255, 255, 0.7);
     --glass-border: rgba(255, 255, 255, 0.3);
-    
-    /* Tiempos de Animación */
-    --transition-fast: 0.3s ease;
-    --transition-smooth: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.08);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.2s ease;
 }
 
-/* --- 2. RESET Y BASES --- */
+/* --- 1. RESET GENERAL --- */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Fundamental para que los paddings no rompan el layout */
-    -webkit-tap-highlight-color: transparent; /* Quita el recuadro azul al tocar en celular */
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Evita el recuadro gris en móvil */
 }
 
 html {
-    scroll-behavior: smooth; /* Para que al tocar un link la página "navegue" suavemente */
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base para rems */
 }
 
 body {
-    font-family: var(--font-main);
+    font-family: 'Poppins', sans-serif; /* Tu elección de fuente */
     background-color: var(--off-white);
     color: var(--deep-navy);
     line-height: 1.6;
-    overflow-x: hidden; /* Evita que las animaciones generen scroll lateral */
+    overflow-x: hidden;
 }
 
-/* --- 3. CLASES DE UTILIDAD (Reutilizables) --- */
-.section-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+/* --- 2. TIPOGRAFÍA --- */
+h1, h2, h3, h4 {
+    font-weight: 800;
+    line-height: 1.2;
 }
 
-.glass-effect {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-fast);
+}
+
+ul {
+    list-style: none;
 }
 
 img {
@@ -64,14 +65,52 @@ img {
     display: block;
 }
 
-ul { list-style: none; }
-a { text-decoration: none; color: inherit; }
+/* --- 3. CLASES DE UTILIDAD (Layout) --- */
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
 
-/* Scrollbar personalizada (Para que combine con la web) */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--off-white); }
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+}
+
+.text-reveal {
+    background: linear-gradient(to right, var(--primary-blue), var(--primary-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- 4. SCROLLBAR PERSONALIZADA (Estilo Pro) --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--off-white);
+}
+
 ::-webkit-scrollbar-thumb {
     background: var(--primary-blue);
     border-radius: 10px;
 }
 
+::-webkit-scrollbar-thumb:hover {
+    background: var(--deep-navy);
+}
+
+/* --- 5. CLASES PARA ANIMACIONES (Triggered by JS) --- */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition-smooth);
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
