@@ -1,86 +1,152 @@
 /**
- * Lógica de Carrito y Botella Interactiva
- * Manuel Cardenas - Pico Truncado
+ * shop.js - Lógica de Carrito y Botella Interactiva
+ * Manuel Cardenas | Pico Truncado
  */
 
 let cart = JSON.parse(localStorage.getItem('limpieza_cart')) || [];
+const PRICE_PER_LITER = 1500; // Podés cambiarlo según la lista de tu tía
 
 document.addEventListener('DOMContentLoaded', () => {
+    initBottleLogic();
     updateCartUI();
-    setupBottleLogic();
+    setupCartToggle();
 });
 
-// --- SECCIÓN BOTELLA INTERACTIVA ---
-function setupBottleLogic() {
+// --- 1. LÓGICA DE LA BOTELLA (Suelto) ---
+function initBottleLogic() {
     const range = document.getElementById('liters-range');
+    const chips = document.querySelectorAll('.btn-chip');
     const liquid = document.querySelector('.liquid-bg');
     const displayLiters = document.getElementById('display-liters');
     const displayPrice = document.getElementById('display-price');
     const btnAddBulk = document.querySelector('.btn-add-bulk');
 
-    const PRICE_PER_LITER = 1500; // Podés traerlo de Supabase luego
+    if (!range) return;
 
-    if(!range) return;
-
-    range.addEventListener('input', (e) => {
-        const liters = e.target.value;
-        const total = liters * PRICE_PER_LITER;
+    // Función para actualizar visualmente la botella y precios
+    const updateBottle = (liters) => {
+        const total = (liters * PRICE_PER_LITER).toLocaleString('es-AR');
         
-        // Animamos la botella
-        liquid.style.height = (liters * 20) + "%"; // 5L = 100%
-        displayLiters.innerText = liters + "L";
-        displayPrice.innerText = "$" + total;
+        // Animación del líquido (10L es el 100% de la botella)
+        const percentage = (liters / 10) * 100;
+        liquid.style.height = `${percentage}%`;
+        
+        // Actualizar textos evitando que se peguen
+        displayLiters.innerText = `${liters}L`;
+        displayPrice.innerText = `$${total}`;
+        range.value = liters;
+    };
+
+    // Evento para los botones rápidos (1L, 2L, 5L)
+    chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const lts = chip.dataset.liters;
+            updateBottle(lts);
+        });
     });
 
+    // Evento para el slider (range)
+    range.addEventListener('input', (e) => {
+        updateBottle(e.target.value);
+    });
+
+    // Botón agregar al carrito
     btnAddBulk.addEventListener('click', () => {
         const liters = range.value;
         const item = {
-            id: 'bulk-' + Date.now(),
-            name: `Jabón Suelto (${liters}L)`,
-            price: liters * PRICE_PER_LITER,
-            img: 'img/bottle-icon.png',
-            qty: 1
+            id: `bulk-${Date.now()}`,
+            nombre: `Jabón Suelto (${liters}L)`,
+            precio: liters * PRICE_PER_LITER,
+            imagen_url: 'img/bottle-icon.png', // Asegurate que esta ruta exista
+            cantidad: 1
         };
         addToCart(item);
-        alert(`¡Se agregaron ${liters}L al carrito!`);
+        alert(`✅ ¡Se sumaron ${liters} litros!`);
     });
+    
+    // Inicializar en 1L
+    updateBottle(1);
 }
 
-// --- LÓGICA DEL CARRITO ---
+// --- 2. GESTIÓN DEL CARRITO ---
 function addToCart(product) {
-    const existing = cart.find(i => i.id === product.id);
+    // Si es un producto de catálogo, buscamos si ya existe por ID
+    const existing = cart.find(item => item.id === product.id);
+    
     if (existing) {
-        existing.qty++;
+        existing.cantidad++;
     } else {
         cart.push(product);
     }
-    saveCart();
+    
+    saveAndRefresh();
 }
 
-function saveCart() {
+function saveAndRefresh() {
     localStorage.setItem('limpieza_cart', JSON.stringify(cart));
     updateCartUI();
 }
 
 function updateCartUI() {
-    const count = document.getElementById('cart-count');
-    const totalElement = document.getElementById('cart-total');
-    
-    const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
-    const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-    
-    if(count) count.innerText = totalItems;
-    if(totalElement) totalElement.innerText = "$" + totalPrice;
+    const cartItems = document.getElementById('cart-items');
+    const cartCount = document.getElementById('cart-count');
+    const cartTotal = document.getElementById('cart-total');
+
+    if (!cartItems) return;
+
+    cartItems.innerHTML = '';
+    let total = 0;
+    let count = 0;
+
+    cart.forEach((item, index) => {
+        total += item.precio * item.cantidad;
+        count += item.cantidad;
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <div class="item-info">
+                    <strong>${item.nombre}</strong>
+                    <span>${item.cantidad} x $${item.precio}</span>
+                </div>
+                <button onclick="removeFromCart(${index})" class="btn-remove">✕</button>
+            </div>
+        `;
+    });
+
+    cartCount.innerText = count;
+    cartTotal.innerText = `$${total.toLocaleString('es-AR')}`;
 }
 
-// Botón de WhatsApp - Finalizar Compra
-document.querySelector('.btn-checkout')?.addEventListener('click', () => {
-    let message = "Hola LimpiezaYa! Quiero pedir:\n";
-    cart.forEach(i => {
-        message += `- ${i.name} x${i.qty} ($${i.price * i.qty})\n`;
-    });
-    const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-    message += `*Total: $${total}*`;
+window.removeFromCart = (index) => {
+    cart.splice(index, 1);
+    saveAndRefresh();
+};
+
+// --- 3. WHATSAPP Y PANELES ---
+function setupCartToggle() {
+    const cartBtn = document.getElementById('cart-toggle');
+    const cartDrawer = document.getElementById('cart-drawer');
     
-    window.open(`https://wa.me/2975373508?text=${encodeURIComponent(message)}`);
-});
+    cartBtn?.addEventListener('click', () => {
+        cartDrawer.classList.toggle('active');
+    });
+
+    // Finalizar compra por WhatsApp
+    document.querySelector('.btn-checkout')?.addEventListener('click', () => {
+        if (cart.length === 0) return alert("El carrito está vacío");
+
+        let message = "¡Hola LimpiezaYa! 🧼 Quiero hacer este pedido:\n\n";
+        let subtotal = 0;
+
+        cart.forEach(item => {
+            message += `• ${item.nombre} (x${item.cantidad}) - $${item.precio * item.cantidad}\n`;
+            subtotal += item.precio * item.cantidad;
+        });
+
+        message += `\n*Total estimado: $${subtotal}*`;
+        message += `\n📍 Entrega en Pico Truncado`;
+
+        const encoded = encodeURIComponent(message);
+        window.open(`https://wa.me/2975373508?text=${encoded}`); // Tu número de contacto
+    });
+}
