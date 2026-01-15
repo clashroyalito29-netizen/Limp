@@ -5,24 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     
     <title>LimpiezaYa | Artículos de Limpieza en Pico Truncado</title>
-    <meta name="description" content="Venta de artículos de limpieza a granel, jabón suelto y plásticos en Pico Truncado. Calidad premium, precios de fábrica y envíos a domicilio.">
-    <meta name="keywords" content="limpieza pico truncado, jabon suelto, detergente a granel, articulos de limpieza, plasticos, limpieza ya, santa cruz">
-    <meta name="author" content="Manuel Cardenas">
-    <link rel="canonical" href="https://limpiezaya.vercel.app/">
+    <meta name="description" content="Venta de jabón suelto y artículos de limpieza premium en Pico Truncado. ¡Ahorrá comprando a granel!">
+    <meta name="keywords" content="limpieza pico truncado, jabon suelto, detergente, manuel cardenas">
+    <link rel="canonical" href="https://limpiezaya-alpha.vercel.app/">
 
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="LimpiezaYa | Tu hogar impecable en Pico Truncado">
-    <meta property="og:description" content="Comprá jabón suelto y artículos de limpieza de calidad premium. ¡Hacé tu pedido y te lo llevamos!">
+    <meta property="og:title" content="LimpiezaYa | Tu hogar impecable">
+    <meta property="og:description" content="Hacé tu pedido de limpieza suelta y te lo llevamos a domicilio en Truncado.">
     <meta property="og:image" content="https://eabpagvszxbxhzxiciyx.supabase.co/storage/v1/object/public/productos/banner-seo.jpg">
-    <meta property="og:url" content="https://limpiezaya.vercel.app/">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="LimpiezaYa - Pico Truncado">
-    <meta name="twitter:description" content="Artículos de limpieza a granel con envío a domicilio.">
-
-    <meta name="theme-color" content="#00B4D8">
-
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="theme-color" content="#4A90E2">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,13 +23,14 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/animations.css">
 </head>
+    
 <body>
     <div id="bubble-canvas-container"></div>
 
     <header id="main-nav" class="glass-effect">
         <div class="nav-top">
             <div class="nav-left">
-                <button id="menu-toggle" class="btn-icon">☰</button>
+                <button id="menu-toggle" class="btn-icon" aria-label="Abrir menú">☰</button>
             </div>
             <a href="index.html" class="logo-brand">
                 <h1>Limpieza<span>Ya</span></h1>
@@ -53,7 +44,8 @@
         
         <div class="nav-search-bar">
             <div class="search-box">
-                <input type="text" placeholder="Buscar por nombre o fragancia...">
+                <input type="text" id="main-search" placeholder="¿Qué buscás hoy?">
+                <button class="btn-search">🔍</button>
             </div>
         </div>
     </header>
@@ -62,10 +54,10 @@
         <section class="hero-section" id="hero">
             <div class="hero-container">
                 <h2 class="text-reveal">Tu hogar <span>impecable</span> en Pico Truncado.</h2>
-                <p>Calidad premium en artículos de limpieza y plásticos. ¡Ahorrá comprando suelto!</p>
+                <p>Artículos de limpieza de calidad premium y plásticos. ¡Envíos a domicilio!</p>
                 <div class="hero-btns">
                     <a href="#products" class="btn-primary">Ver Catálogo</a>
-                    <a href="#soap-experience" class="btn-outline">Venta por Litro</a>
+                    <a href="#soap-experience" class="btn-outline">Comprar Suelto</a>
                 </div>
             </div>
         </section>
@@ -76,11 +68,11 @@
                     <span class="flyer-item">✨ Jabón Tipo Ariel $1500 xL</span>
                     <span class="flyer-item">🧼 Suavizante Lavanda en Stock</span>
                     <span class="flyer-item">🚚 Envíos Gratis en Truncado</span>
-                    <span class="flyer-item">💎 Calidad Premium Garantizada</span>
+                    <span class="flyer-item">💎 Calidad Garantizada</span>
                     <span class="flyer-item">✨ Jabón Tipo Ariel $1500 xL</span>
                     <span class="flyer-item">🧼 Suavizante Lavanda en Stock</span>
                     <span class="flyer-item">🚚 Envíos Gratis en Truncado</span>
-                    <span class="flyer-item">💎 Calidad Premium Garantizada</span>
+                    <span class="flyer-item">💎 Calidad Garantizada</span>
                 </div>
             </div>
         </div>
@@ -104,13 +96,26 @@
                     </div>
                 </div>
                 <div class="soap-info">
-                    <h3>Cargá tus propios envases</h3>
-                    <p>Elegí la cantidad de jabón líquido premium y ahorrá plástico.</p>
-                    <div class="price-display">
-                        <span id="display-liters">1L</span> = <span id="display-price">$1500</span>
+                    <h3>Tu jabón, a tu medida</h3>
+                    <p>Seleccioná la cantidad exacta. ¡Más comprás, menos pagás!</p>
+                    
+                    <div class="liter-chips">
+                        <button class="btn-chip" data-liters="1">1L</button>
+                        <button class="btn-chip" data-liters="2">2L</button>
+                        <button class="btn-chip" data-liters="5">5L</button>
                     </div>
-                    <input type="range" id="liters-range" min="1" max="5" value="1" step="1">
-                    <button class="btn-add-bulk">Agregar Pedido 🛒</button>
+
+                    <div class="price-display">
+                        <span id="display-liters">1L</span> 
+                        <span class="price-divider">|</span> 
+                        <span id="display-price">$0.00</span>
+                    </div>
+
+                    <input type="range" id="liters-range" min="1" max="10" value="1" step="1">
+                    
+                    <button class="btn-add-bulk pulse-anim">
+                        🛒 Agregar litros al carrito
+                    </button>
                 </div>
             </div>
         </section>
@@ -120,33 +125,33 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <div class="logo-footer">Limpieza<span>Ya</span></div>
-                <p>Calidad premium al mejor precio de la zona.</p>
+                <p>Calidad premium en Pico Truncado.</p>
             </div>
             <div class="footer-contact">
-                <p>📍 Pico Truncado, Santa Cruz</p>
-                <p>📧 manuel.co351@gmail.com</p> </div>
+                <p>📍 Santa Cruz, Pico Truncado</p>
+                <p>📞 2975373508</p> </div>
         </div>
         <div class="footer-copy">
-            <p>&copy; 2026 LimpiezaYa. Desarrollado por <strong>Manuel Cardenas</strong>.</p> </div>
+            <p>&copy; 2026 Desarrollado por <strong>Manuel Cardenas</strong>.</p> </div>
     </footer>
 
     <aside id="side-menu" class="panel-overlay left">
         <div class="panel-content">
             <nav class="side-nav">
                 <a href="#hero">Inicio</a>
-                <a href="#products">Productos</a>
-                <a href="admin.html">Panel de Control 🔑</a>
+                <a href="#products">Ver Catálogo</a>
+                <a href="admin.html">Panel Dueña 🔑</a>
             </nav>
         </div>
     </aside>
 
     <aside id="cart-drawer" class="panel-overlay right">
         <div class="panel-content">
-            <h3>Tu Carrito</h3>
+            <h3>Tu Pedido</h3>
             <div id="cart-items"></div>
             <div class="cart-total-box">
-                <p>Total: <span id="cart-total">$0</span></p>
-                <button class="btn-checkout pulse-anim">Finalizar por WhatsApp</button>
+                <p>Total estimado: <span id="cart-total">$0.00</span></p>
+                <button class="btn-checkout">Finalizar por WhatsApp</button>
             </div>
         </div>
     </aside>
@@ -157,7 +162,6 @@
 
     <template id="card-template">
         <div class="product-card">
-            <div class="card-shine"></div>
             <div class="card-img-container">
                 <img src="" alt="Producto">
             </div>
@@ -170,5 +174,6 @@
     </template>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabase-config.js"></script> <script src="js/animations.js"></script> <script src="js/shop.js"></script> <script src="js/main.js"></script> </body>
+    <script src="js/supabase-config.js"></script> <script src="js/animations.js"></script>
+    <script src="js/shop.js"></script> <script src="js/main.js"></script> </body>
 </html>
