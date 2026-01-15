@@ -164,3 +164,77 @@
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
 }
+/* BOTONES DE LITROS (Chips) */
+.liter-chips {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.btn-chip {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid var(--primary-blue);
+    background: transparent;
+    color: var(--primary-blue);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.btn-chip.active, .btn-chip:hover {
+    background: var(--primary-blue);
+    color: white;
+}
+
+/* BOTÓN HAMBURGUESA ELEGANTE */
+.btn-nav-round {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--clean-white);
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    box-shadow: var(--shadow-soft);
+}
+
+.btn-nav-round span {
+    width: 20px;
+    height: 2px;
+    background: var(--primary-blue);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* BOTÓN CERRAR PANEL */
+.close-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--primary-pink);
+    color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* BOTÓN MERCADO PAGO */
+.btn-mercadopago {
+    width: 100%;
+    padding: 12px;
+    background: #009EE3; /* Azul oficial Mercado Libre */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
