@@ -150,3 +150,11 @@ function setupCartToggle() {
         window.open(`https://wa.me/2975373508?text=${encoded}`); // Tu número de contacto
     });
 }
+document.querySelector('.btn-mercadopago')?.addEventListener('click', () => {
+    if (cart.length === 0) return alert("Carrito vacío");
+    
+    // Aquí podrías integrar la API de MP. Por ahora, redirigimos a tu link de cobro o enviamos mensaje.
+    const total = document.getElementById('cart-total').innerText;
+    alert(`Redirigiendo a Mercado Pago para abonar ${total}...`);
+    // window.location.href = "TU_LINK_DE_PAGO_FIJO"; 
+});
