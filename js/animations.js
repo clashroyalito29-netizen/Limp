@@ -73,3 +73,19 @@ function initScrollReveal() {
         observer.observe(el);
     });
 }
+/**
+ * Lógica para retirar el Splash Screen
+ */
+window.addEventListener('load', () => {
+    const splash = document.getElementById('splash-screen');
+    
+    // Le damos un pequeño delay extra para que el usuario vea el logo (2 segundos)
+    setTimeout(() => {
+        splash.classList.add('hidden');
+        
+        // Opcional: Iniciamos las burbujas del fondo del sitio justo después
+        if (typeof initBubbles === 'function') {
+            initBubbles();
+        }
+    }, 2000); 
+});
